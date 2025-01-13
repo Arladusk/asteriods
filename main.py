@@ -7,6 +7,9 @@ def fill_screen(screen: pygame.Surface):
 
 def main_loop(screen: pygame.Surface):
         while True:
+            for event in pygame.event.get():
+                if event.type ==pygame.QUIT:
+                    return
             fill_screen(screen)
             pygame.display.flip()
 
