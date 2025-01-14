@@ -9,9 +9,14 @@ class Game:
         self.clock = pygame.time.Clock()
         self.dt = 0
 
-    #placeholder
     def run(self):
-        pass
+        while self.running:
+            for event in pygame.event.get():
+                if event.type ==pygame.QUIT:
+                    return
+            self.paint_background()
+            self.refresh_screen()
+            self.dt = self.clock.tick(60) / 1000
 
     def paint_background(self):
         self.screen.fill(COLOR_BLACK)
