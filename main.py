@@ -6,6 +6,7 @@ class Game:
         self.running = True
         self.resolution = (SCREEN_WIDTH, SCREEN_HEIGHT)
         self.screen = pygame.display.set_mode(self.resolution)
+        pygame.display.set_caption(GAME_TITLE)
         self.clock = pygame.time.Clock()
         self.dt = 0
 
