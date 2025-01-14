@@ -16,7 +16,7 @@ class Game:
                     return
             self.paint_background()
             self.refresh_screen()
-            self.dt = self.clock.tick(60) / 1000
+            self.dt = self.clock.tick(FPS) / 1000
 
     def paint_background(self):
         self.screen.fill(COLOR_BLACK)
@@ -24,34 +24,15 @@ class Game:
     def refresh_screen(self):
         pygame.display.flip()
 
-
-
-
-# Fills the game window with Black color. 
-def fill_screen(screen: pygame.Surface):
-    black = (0, 0, 0)
-    screen.fill(black) 
-
-# To be written
-def main_loop(screen: pygame.Surface, clock: pygame.time.Clock):
-        dt = 0
-        while True:
-            for event in pygame.event.get():
-                if event.type ==pygame.QUIT:
-                    return
-            fill_screen(screen)
-            pygame.display.flip()
-            dt = clock.tick(60) / 1000
-
-# Initiates pygame, creates a Display and Clock object, prints some terminal text, starts the game. 
+# Initiates pygame, creates and starts the game object. 
 def main():
+    def main():
     pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    clock = pygame.time.Clock()
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
-    main_loop(screen, clock)
+    game = Game()
+    game.run()
 
 if __name__ == "__main__":
     main()
