@@ -1,5 +1,17 @@
 import pygame
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, ASTEROID_MIN_RADIUS, ASTEROID_KINDS, ASTEROID_SPAWN_RATE, ASTEROID_MAX_RADIUS
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, ASTEROID_MIN_RADIUS, ASTEROID_KINDS, ASTEROID_SPAWN_RATE, ASTEROID_MAX_RADIUS, COLOR_BLACK, GAME_TITLE
+
+class Game:
+    def __init__(self):
+        self.running = True
+        self.resolution = (SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.screen = pygame.display.set_mode(self.resolution)
+        self.clock = pygame.time.Clock()
+        self.dt = 0
+
+
+
+
 
 # Fills the game window with Black color. 
 def fill_screen(screen: pygame.Surface):
