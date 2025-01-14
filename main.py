@@ -26,7 +26,6 @@ class Game:
 
 # Initiates pygame, creates and starts the game object. 
 def main():
-    def main():
     pygame.init()
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
