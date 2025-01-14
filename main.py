@@ -9,6 +9,15 @@ class Game:
         self.clock = pygame.time.Clock()
         self.dt = 0
 
+    #placeholder
+    def run(self):
+        pass
+
+    def paint_background(self):
+        self.screen.fill(COLOR_BLACK)
+
+    def refresh_screen(self):
+        pygame.display.flip()
 
 
 
