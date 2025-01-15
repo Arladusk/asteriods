@@ -18,9 +18,11 @@ class Game:
                 if event.type ==pygame.QUIT:
                     return
             self.paint_background()
+            self.player.update(self.dt)
             self.player.draw(self.screen)
             self.refresh_screen()
             self.dt = self.clock.tick(FPS) / 1000
+
 
     def paint_background(self):
         self.screen.fill(COLOR_BLACK)
