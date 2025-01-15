@@ -1,5 +1,6 @@
 import pygame
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, ASTEROID_MIN_RADIUS, ASTEROID_KINDS, ASTEROID_SPAWN_RATE, ASTEROID_MAX_RADIUS, COLOR_BLACK, GAME_TITLE
+from player import Player
 
 class Game:
     def __init__(self):
@@ -9,6 +10,7 @@ class Game:
         pygame.display.set_caption(GAME_TITLE)
         self.clock = pygame.time.Clock()
         self.dt = 0
+        self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     def run(self):
         while self.running:
@@ -16,6 +18,7 @@ class Game:
                 if event.type ==pygame.QUIT:
                     return
             self.paint_background()
+            self.player.draw(self.screen)
             self.refresh_screen()
             self.dt = self.clock.tick(FPS) / 1000
 
