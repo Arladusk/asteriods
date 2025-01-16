@@ -5,15 +5,9 @@ from player import Player
 class Game:
     def __init__(self):
         self.running = True
-        self.resolution = (SCREEN_WIDTH, SCREEN_HEIGHT)
-        self.screen = pygame.display.set_mode(self.resolution)
-        pygame.display.set_caption(GAME_TITLE)
-        self.clock = pygame.time.Clock()
-        self.dt = 0
-        self.updatables = pygame.sprite.Group()
-        self.drawables =  pygame.sprite.Group()
-        Player.containers = (self.updatables, self.drawables)
-        self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        self.initialize_display()
+        self.initialize_game_objects()
+        self.initialize_game_clock()
 
     def run(self):
         while self.running:
@@ -27,6 +21,21 @@ class Game:
                 drawable.draw(self.screen)
             self.refresh_screen()
             self.dt = self.clock.tick(FPS) / 1000
+
+    def initialize_display(self):
+       self.resolution = (SCREEN_WIDTH, SCREEN_HEIGHT)
+       self.screen = pygame.display.set_mode(self.resolution)
+       pygame.display.set_caption(GAME_TITLE) 
+
+    def initialize_game_objects(self):
+        self.updatables = pygame.sprite.Group()
+        self.drawables =  pygame.sprite.Group()
+        Player.containers = (self.updatables, self.drawables)
+        self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    
+    def initialize_game_clock(self):
+        self.clock = pygame.time.Clock()
+        self.dt = 0
 
     def paint_background(self):
         self.screen.fill(COLOR_BLACK)
