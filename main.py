@@ -1,6 +1,7 @@
 import pygame
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, ASTEROID_MIN_RADIUS, ASTEROID_KINDS, ASTEROID_SPAWN_RATE, ASTEROID_MAX_RADIUS, COLOR_BLACK, GAME_TITLE
 from player import Player
+from asteroid import Asteroid
 
 class Game:
     def __init__(self):
@@ -30,7 +31,9 @@ class Game:
     def initialize_game_objects(self):
         self.updatables = pygame.sprite.Group()
         self.drawables =  pygame.sprite.Group()
+        self.asteroids = pygame.sprite.Group()
         Player.containers = (self.updatables, self.drawables)
+        Asteroid.containers = (self.updatables, self.drawables, self.asteroids)
         self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     
     def initialize_game_clock(self):
