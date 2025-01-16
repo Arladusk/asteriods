@@ -3,6 +3,7 @@ from constants import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, ASTEROID_MIN_RADIUS, AST
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from circleshape import CircleShape
 
 class Game:
     def __init__(self):
@@ -19,6 +20,8 @@ class Game:
             self.paint_background()
             for updatable in self.updatables:
                 updatable.update(self.dt) 
+            for asteroid in self.asteroids:
+                self.check_collision(asteroid)
             for drawable in self.drawables:
                 drawable.draw(self.screen)
             self.refresh_screen()
@@ -47,14 +50,19 @@ class Game:
         self.screen.fill(COLOR_BLACK)
 
     def refresh_screen(self):
-        pygame.display.flip()    
+        pygame.display.flip()
+
+    def check_collision(self, asteroid):
+        if self.player.collision_detection(asteroid) == True:
+            print("Game over!")
+            exit()
+        else:
+            pass
 
 # Initiates pygame, creates and starts the game object. 
 def main():
     pygame.init()
     print("Starting asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
     game = Game()
     game.run()
 
