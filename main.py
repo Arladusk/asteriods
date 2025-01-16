@@ -10,6 +10,9 @@ class Game:
         pygame.display.set_caption(GAME_TITLE)
         self.clock = pygame.time.Clock()
         self.dt = 0
+        self.updatables = pygame.sprite.Group()
+        self.drawables =  pygame.sprite.Group()
+        Player.containers = (self.updatables, self.drawables)
         self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     def run(self):
@@ -18,17 +21,18 @@ class Game:
                 if event.type ==pygame.QUIT:
                     return
             self.paint_background()
-            self.player.update(self.dt)
-            self.player.draw(self.screen)
+            for updatable in self.updatables:
+                updatable.update(self.dt) 
+            for drawable in self.drawables:
+                drawable.draw(self.screen)
             self.refresh_screen()
             self.dt = self.clock.tick(FPS) / 1000
-
 
     def paint_background(self):
         self.screen.fill(COLOR_BLACK)
 
     def refresh_screen(self):
-        pygame.display.flip()
+        pygame.display.flip()    
 
 # Initiates pygame, creates and starts the game object. 
 def main():
