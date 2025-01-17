@@ -72,6 +72,7 @@ class Game:
 
     def check_shot_collision(self, asteroid, shot):
         if shot.collision_detection(asteroid) == True:
+            asteroid.split()
             shot.kill()
             asteroid.kill()
 
