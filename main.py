@@ -4,6 +4,7 @@ from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from circleshape import CircleShape
+from shot import Shot
 
 class Game:
     def __init__(self):
@@ -33,15 +34,23 @@ class Game:
        pygame.display.set_caption(GAME_TITLE) 
 
     def initialize_game_objects(self):
+        self.make_groups()
+        self.fill_groups()
+        self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        AsteroidField()
+        
+    def make_groups(self):
         self.updatables = pygame.sprite.Group()
         self.drawables =  pygame.sprite.Group()
         self.asteroids = pygame.sprite.Group()
+        self.shots = pygame.sprite.Group()
+
+    def fill_groups(self):
         Player.containers = (self.updatables, self.drawables)
+        Shot.containers = (self.updatables, self.drawables)
         Asteroid.containers = (self.updatables, self.drawables, self.asteroids)
         AsteroidField.containers = (self.updatables,)
-        self.player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-        AsteroidField()
-    
+        
     def initialize_game_clock(self):
         self.clock = pygame.time.Clock()
         self.dt = 0
