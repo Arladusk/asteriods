@@ -22,7 +22,9 @@ class Game:
             for updatable in self.updatables:
                 updatable.update(self.dt) 
             for asteroid in self.asteroids:
-                self.check_collision(asteroid)
+                self.check_player_collision(asteroid)
+                for shot in self.shots:
+                    self.check_shot_collision(asteroid, shot)
             for drawable in self.drawables:
                 drawable.draw(self.screen)
             self.refresh_screen()
@@ -47,7 +49,7 @@ class Game:
 
     def fill_groups(self):
         Player.containers = (self.updatables, self.drawables)
-        Shot.containers = (self.updatables, self.drawables)
+        Shot.containers = (self.updatables, self.drawables, self.shots)
         Asteroid.containers = (self.updatables, self.drawables, self.asteroids)
         AsteroidField.containers = (self.updatables,)
         
@@ -61,12 +63,17 @@ class Game:
     def refresh_screen(self):
         pygame.display.flip()
 
-    def check_collision(self, asteroid):
+    def check_player_collision(self, asteroid):
         if self.player.collision_detection(asteroid) == True:
             print("Game over!")
             exit()
         else:
             pass
+
+    def check_shot_collision(self, asteroid, shot):
+        if shot.collision_detection(asteroid) == True:
+            shot.kill()
+            asteroid.kill()
 
 # Initiates pygame, creates and starts the game object. 
 def main():
